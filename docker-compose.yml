@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  sshtunnel:
+    image: sshtunnel
+    hostname: sshtunnel
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - ${TUNNEL_LOCAL_PORT}:${TUNNEL_LOCAL_PORT}
+    environment:
+      - TUNNEL_USERNAME=${TUNNEL_USERNAME}
+      - TUNNEL_PASSWORD=${TUNNEL_PASSWORD}
+      - TUNNEL_GATEWAY=${TUNNEL_GATEWAY}
+      - TUNNEL_GATEWAY_PORT=${TUNNEL_GATEWAY_PORT}
+      - TUNNEL_REMOTE_HOST=${TUNNEL_REMOTE_HOST}
+      - TUNNEL_REMOTE_PORT=${TUNNEL_REMOTE_PORT}
+      - TUNNEL_LOCAL_HOST=${TUNNEL_LOCAL_HOST}
+      - TUNNEL_LOCAL_PORT=${TUNNEL_LOCAL_PORT}
